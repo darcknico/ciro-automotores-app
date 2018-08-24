@@ -1,0 +1,66 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="filtros()" >
+        <ion-icon name="options"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+  <ion-refresher (ionRefresh)="forceReload($event)">
+    <ion-refresher-content refreshingText="Recargando desde API...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-card *ngFor="let vehiculo of vehiculos" class="adv-map">
+    <div style="position: relative">
+      <img *ngIf="vehiculo.fotos.length > 0"  [src]="'https:\\ciroautomotores.com.ar'+vehiculo.fotos[0].archivo+'?p=small'"/>
+      <ion-fab right down>
+        <button ion-fab>
+          <ion-icon name="open"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
+    <ion-card-content>
+      <ion-card-title>
+        {{vehiculo.marca.nombre}} {{vehiculo.modelo}}
+      </ion-card-title>
+      <p>
+        {{vehiculo.precio_venta}}
+      </p>
+    </ion-card-content>
+    <ion-row no-padding>
+      <ion-col>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='star'></ion-icon>
+          Favorite
+        </button>
+      </ion-col>
+      <ion-col text-center>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='musical-notes'></ion-icon>
+          Listen
+        </button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button clear small color="danger" icon-start>
+          <ion-icon name='share-alt'></ion-icon>
+          Share
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="searchTerm" [showCancelButton]="shouldShowCancel" (change)="buscar($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-footer>

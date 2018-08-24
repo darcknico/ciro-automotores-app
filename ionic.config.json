@@ -1,0 +1,8 @@
+{
+  "name": "ciro-automotores-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "6985ad35"
+}

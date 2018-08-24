@@ -1,0 +1,52 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<!-- -->
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="login-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+      <h2 ion-text class="text-primary">
+        <strong>Ciro Automotores</strong>
+        <br>
+        Autenticacion
+      </h2>
+    </div>
+
+    <!-- Login form -->
+    <form class="list-form" #form="ngForm" (ngSubmit)="onLogin(form)" novalidate>
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+          Email
+        </ion-label>
+        
+        <ion-input type="email" [(ngModel)]="login.email" name="email" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>
+          <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+          Contraseña
+        </ion-label>
+        <ion-input type="password" [(ngModel)]="login.password" name="password" ></ion-input>
+      </ion-item>
+      <br>
+      <div padding>
+        <button ion-button icon-start block color="dark" tappable type="submit" block>
+          <ion-icon name="log-in"></ion-icon>
+          INGRESAR
+        </button>
+      </div>
+    </form>
+    
+
+  </div>
+</ion-content>
+
