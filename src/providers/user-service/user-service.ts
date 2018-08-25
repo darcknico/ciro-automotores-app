@@ -28,6 +28,7 @@ export class UserServiceProvider {
 
 	login(login: {}) {
 		let headers = new Headers();
+		headers.append('Access-Control-Allow-Origin', '*');
 		headers.append('content-type','application/json');
 		let options = new RequestOptions({ headers: headers });
 		return this.http.post(this.global.apiUrl+this.authProvider.loginUrl, login,options)
