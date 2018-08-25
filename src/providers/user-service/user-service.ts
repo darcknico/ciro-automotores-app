@@ -34,7 +34,6 @@ export class UserServiceProvider {
 		.map(response => response.json())
 		.map(data => {
 			this.setAuth(data);
-			this.getUser();
 			return data.token;
 		});		
 	};
@@ -43,46 +42,11 @@ export class UserServiceProvider {
 		return this.storage.set('token', data.token);
 	}
 
-	getUser() {
-
-		// this.http.get('https://api.github.com/users')
-        // .subscribe(response => console.log(response));
-        return this.authHttp.get(this.global.apiUrl+'/user'); 
-
-
-		// return this.authHttp.get(this.global.apiUrl+'/user')
-		// .map(response => response)
-		// .map(data => {
-		// 	this.setUser(data);
-		// 	return data;
-		// });		
-	};
-
 	getToken() {
 		return this.storage.get('token').then((val) => {
 			return val;
 		});  
 	};
-
-	// getAccessToken() {
-	// 	this.getToken().then((val) => {
-	// 		let token = JSON.parse(val).access_token;
-	// 		return token;
-	// 	});        	
-	// };
-	// return this.http.get(this.url)
- //    .do(this.logResponse)
- //    .map(this.extractData)
- //    .do(this.logResponse)
- //    .catch(this.catchError)
- //    .subscribe(
- //      resultado => this.messages = resultado, // En this.messages se guardará el 
- //                                              // resultado de extractData()
- //      error => console.log(error)
- //    )
-	private setUser(data) {
-		return this.storage.set('user', data);
-	}
 
 	hasLoggedIn(): Promise<boolean> {
 		return this.storage.get('token').then((val) => {
@@ -99,7 +63,6 @@ export class UserServiceProvider {
 		.map(response => response.json())
 		.map(data => {
 			this.setAuth(data);
-			this.getUser();
 			return data.token;
 		});		
 	};
