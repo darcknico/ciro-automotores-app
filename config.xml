@@ -5,8 +5,9 @@
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
     <access origin="*" />
-    <access origin="http://api.ciroautomotores.com.ar" />
-    <allow-navigation href="http://api.ciroautomotores.com.ar" />
+    <access origin="http://api.ciroautomotores.com.ar/*" />
+    <allow-navigation href="http://api.ciroautomotores.com.ar/*" />
+    <allow-intent href="http://api.ciroautomotores.com.ar/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
