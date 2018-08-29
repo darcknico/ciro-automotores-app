@@ -57,7 +57,7 @@ export class LoginPage {
 		let alert = this.alertCtrl.create({
 			title: 'Error',
 			// message: error.json().message,
-			message: 'Wrong user or password',
+			message: error,
 			buttons: ['OK']
 		});
 		alert.present();

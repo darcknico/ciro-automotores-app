@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalServiceProvider } from '../global-service/global-service';
 import { CacheService } from 'ionic-cache';
-import { ToastController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 import { VehiculoDisponible } from '../../interfaces/vehiculo-disponible';
 
 /*

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Http,Headers,RequestOptions } from '@angular/http';
+import { Http,Headers} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 
 import { Events } from 'ionic-angular';
@@ -9,7 +8,6 @@ import { Storage } from '@ionic/storage';
 
 import { PassportServiceProvider } from '../passport-service/passport-service';
 import { GlobalServiceProvider } from '../global-service/global-service';
-import { UserOptions } from '../../interfaces/user-options';
 
 @Injectable()
 export class UserServiceProvider {
@@ -23,20 +21,16 @@ export class UserServiceProvider {
 		public events: Events,
 		private http: Http,
 		public storage: Storage,
-		public authHttp: HttpClient) {
+		public authHttp: HttpClient,) {
 	}
 
 	login(login: {}) {
-		let headers = new Headers();
-		headers.append('Access-Control-Allow-Origin', '*');
-		headers.append('content-type','application/json');
-		let options = new RequestOptions({ headers: headers });
-		return this.http.post(this.global.apiUrl+this.authProvider.loginUrl, login,options)
-		.map(response => response.json())
-		.map(data => {
-			this.setAuth(data);
-			return data.token;
-		});		
+		return this.http.post(this.global.apiUrl+this.authProvider.loginUrl, login)
+			.map(response => response.json())
+			.map(data => {
+				this.setAuth(data);
+				return data.token;
+			});
 	};
 
 	private setAuth(data) {
