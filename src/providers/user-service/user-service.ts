@@ -1,6 +1,7 @@
+import { Usuario } from './../../interfaces/user-options';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
-import { Http,Headers} from '@angular/http';
+import { Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 
 import { Events } from 'ionic-angular';
@@ -28,7 +29,9 @@ export class UserServiceProvider {
 		return this.http.post(this.global.apiUrl+this.authProvider.loginUrl, login)
 			.map(response => response.json())
 			.map(data => {
-				this.setAuth(data);
+				this.setAuth(data).then(data=>{
+					this.refreshUser().subscribe(data=>{},error=>{});
+				});
 				return data.token;
 			});
 	};
@@ -51,6 +54,22 @@ export class UserServiceProvider {
 			return false;
 		});
 	};
+	
+	public refreshUser() {
+		return this.authHttp.get<Usuario>(this.global.apiUrl+'details')
+			.map(data => {
+				this.setUser(data);
+				return data;
+			});	
+	};
+
+	public getUser(){
+		return this.storage.get('user');
+	}
+
+	private setUser(data:Usuario) {
+		return this.storage.set('user', data);
+	}
 
 	register(login: {}) {
 

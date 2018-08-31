@@ -5,7 +5,7 @@
 
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu</ion-title>
+        <ion-title>Ciro Automotores</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -13,10 +13,10 @@
 
       <ion-list>
         <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-          {{p.title}}
+          <ion-icon [name]="p.icon"></ion-icon> {{p.title}}
         </button>
         <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
-          {{p.title}}
+          <ion-icon [name]="p.icon"></ion-icon> {{p.title}}
         </button>
       </ion-list>
 
@@ -29,18 +29,27 @@
 
     <ion-header>
       <ion-toolbar>
-        <ion-title>Menu</ion-title>
+        <ion-title>Ciro Automotores</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="outer-content">
-
+      <div class="menu-header" *ngIf="user" >
+        <!--material-design-background-->
+        <img 
+          class="user-avatar round"
+          [src]="'https://ciroautomotores.com.ar/perfil/'+user.empleado.fotoperfil"
+          onerror="this.src='assets/imgs/no-disponible.png'" />
+        <p class="name">{{user.individuo.apellido}} {{user.individuo.nombre}}</p>
+        <p class="e-mail">{{user.email}}</p>
+      </div>
+      
       <ion-list>
         <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-          {{p.title}}
+          <ion-icon [name]="p.icon"></ion-icon> {{p.title}}
         </button>
         <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
-          {{p.title}}
+          <ion-icon [name]="p.icon"></ion-icon> {{p.title}}
         </button>
       </ion-list>
 

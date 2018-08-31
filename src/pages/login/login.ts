@@ -18,12 +18,12 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
 
-  login:UserOptions = {
-    email:'',
-    password:'',
-  };
+	login:UserOptions = {
+		email:'',
+		password:'',
+	};
 
-  constructor(
+	constructor(
 		public userService: UserServiceProvider,
 		public navCtrl: NavController,
 		public events: Events,
@@ -33,7 +33,7 @@ export class LoginPage {
 
 	}
 
-  onLogin(form: NgForm) {
+	onLogin(form: NgForm) {
 
 		if (form.valid) {
 
@@ -41,8 +41,8 @@ export class LoginPage {
 			loading.present();
 			this.userService.login(this.login).subscribe(data => {
 					this.events.publish('user:login');
-					loading.dismiss();
 					this.navCtrl.setRoot(HomePage);
+					loading.dismiss();
 				},
 				error => {
 					loading.dismiss();
@@ -50,9 +50,9 @@ export class LoginPage {
 			});
 			
 		}
-  }
-  
-  showError(error) {
+	}
+	
+	showError(error) {
 		console.log(error);
 		let alert = this.alertCtrl.create({
 			title: 'Error',

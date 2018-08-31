@@ -7,12 +7,16 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>vehiculo</ion-title>
+    <ion-title>{{vehiculo.modelo}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-slides  no-padding lazyLoading pager="true" >
+    <ion-slide *ngFor="let foto of vehiculo.fotos" class="slides" >
+        <img [src]="'https:\\ciroautomotores.com.ar'+foto.archivo+'?p=small'" />
+    </ion-slide>
+  </ion-slides>
 </ion-content>

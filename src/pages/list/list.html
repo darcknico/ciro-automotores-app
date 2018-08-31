@@ -24,7 +24,7 @@
     <div style="position: relative">
       <img *ngIf="vehiculo.fotos.length > 0"  [src]="'https:\\ciroautomotores.com.ar'+vehiculo.fotos[0].archivo+'?p=small'"/>
       <ion-fab right down>
-        <button ion-fab>
+        <button ion-fab (click)="ver(vehiculo)">
           <ion-icon name="open"></ion-icon>
         </button>
       </ion-fab>
@@ -34,7 +34,7 @@
         {{vehiculo.marca.nombre}} {{vehiculo.modelo}}
       </ion-card-title>
       <p>
-        {{vehiculo.precio_venta}}
+        PRECIO VENTA: {{vehiculo.precio_venta}}
       </p>
     </ion-card-content>
     <ion-row no-padding>
@@ -61,6 +61,6 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar color="primary">
-    <ion-searchbar [(ngModel)]="searchTerm" [showCancelButton]="shouldShowCancel" (change)="buscar($event)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchTerm" (search)="buscar($event)" placeholder="Buscar"></ion-searchbar>
   </ion-toolbar>
 </ion-footer>

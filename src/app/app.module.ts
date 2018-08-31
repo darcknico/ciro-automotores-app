@@ -1,3 +1,4 @@
+import { VehiculoPage } from './../pages/vehiculo/vehiculo';
 import { VehiculosFiltrarModalComponent } from './../components/vehiculos-filtrar-modal/vehiculos-filtrar-modal';
 import { VehiculosPopoverComponent } from './../components/vehiculos-popover/vehiculos-popover';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +22,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { CacheModule } from 'ionic-cache';
 import { VehiculoProvider } from '../providers/vehiculo/vehiculo';
 
+import { OneSignal } from '@ionic-native/onesignal';
 @NgModule({
   declarations: [
     MyApp,
@@ -29,6 +31,7 @@ import { VehiculoProvider } from '../providers/vehiculo/vehiculo';
     LoginPage,
     VehiculosPopoverComponent,
     VehiculosFiltrarModalComponent,
+    VehiculoPage,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { VehiculoProvider } from '../providers/vehiculo/vehiculo';
     HttpModule,
     HttpClientModule,
     CacheModule.forRoot(),
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,10 +52,12 @@ import { VehiculoProvider } from '../providers/vehiculo/vehiculo';
     LoginPage,
     VehiculosPopoverComponent,
     VehiculosFiltrarModalComponent,
+    VehiculoPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PassportServiceProvider,
     GlobalServiceProvider,

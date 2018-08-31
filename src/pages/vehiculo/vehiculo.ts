@@ -1,3 +1,4 @@
+import { VehiculoDisponible } from './../../interfaces/vehiculo-disponible';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,7 +16,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class VehiculoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  vehiculo:VehiculoDisponible=null;
+
+  constructor(
+    public navCtrl: NavController, public navParams: NavParams
+  ) {
+    this.vehiculo=navParams.get("dataVehiculo");
   }
 
   ionViewDidLoad() {

@@ -1,3 +1,4 @@
+import { Usuario } from './../interfaces/user-options';
 import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController, Events } from 'ionic-angular';
@@ -8,6 +9,8 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { CacheService } from 'ionic-cache';
+
+import { OneSignal } from '@ionic-native/onesignal';
 
 export interface PageInterface {
   title: string;
@@ -29,15 +32,17 @@ export class MyApp {
   rootPage: any = HomePage;
 
   appPages: PageInterface[] = [
-    { title: 'Home', name: 'HomePage', component: HomePage},
+    { title: 'Inicio', name: 'HomePage', icon:'home', component: HomePage},
   ];
   loggedInPages: PageInterface[] = [
-    { title: 'List', name: 'ListPage', component: ListPage},
-    { title: 'Logout', name: 'LoginPage', component: LoginPage, logsOut: true }
+    { title: 'Disponibles', name: 'ListPage', icon:'car', component: ListPage},
+    { title: 'Salir', name: 'LoginPage', icon:'log-out', component: LoginPage, logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
-      { title: 'Login', name: 'LoginPage', component: LoginPage},
+      { title: 'Ingresar', name: 'LoginPage', icon:'log-in', component: LoginPage},
   ];
+
+  user:Usuario=null;
 
   constructor(
     public platform: Platform, 
@@ -46,23 +51,29 @@ export class MyApp {
     public userService: UserServiceProvider,
     public menu: MenuController,
     public events: Events,
-    public cache: CacheService) {
+    public cache: CacheService,
+    private oneSignal: OneSignal) {
+    this.splashScreen.show();
     this.initializeApp();
 
     // decide which menu items should be hidden by current login status stored in local storage
     this.userService.hasLoggedIn().then((hasLoggedIn) => {
+      this.splashScreen.hide();
       this.enableMenu(hasLoggedIn);
       if(!hasLoggedIn ){
-          this.rootPage = LoginPage;
+        this.rootPage = LoginPage;
       }
       else if(hasLoggedIn ) {
-          this.rootPage = HomePage;
+        this.userService.getUser().then(data=>{
+          this.user = data;
+        });
+        this.rootPage = HomePage;
       }
     });
     
-
     this.listenToLoginEvents();
-    
+
+    this.initializeOnseSignal();
   }
 
   initializeApp() {
@@ -74,7 +85,6 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
     });
   }
 
@@ -111,7 +121,10 @@ export class MyApp {
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {
-        this.enableMenu(true);
+      this.userService.getUser().then(data=>{
+        this.user = data;
+      });
+      this.enableMenu(true);
     });
 
     this.events.subscribe('user:logout', () => {
@@ -121,5 +134,24 @@ export class MyApp {
   enableMenu(loggedIn: boolean) {
     this.menu.enable(loggedIn, 'loggedInMenu');
     this.menu.enable(!loggedIn, 'loggedOutMenu');
+  }
+
+  initializeOnseSignal(){
+    if (this.platform.is('cordova')) {
+      this.oneSignal.startInit('78034361-ab14-4018-a430-6be0744c770a', '63791185516');
+      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+      this.oneSignal.getIds()
+        .then((ids) =>
+        {
+          console.log('getIds: ' + JSON.stringify(ids));
+        });
+      this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+      });
+      this.oneSignal.handleNotificationOpened().subscribe(() => {
+        // do something when a notification is opened
+      });
+      this.oneSignal.endInit();
+    }
   }
 }

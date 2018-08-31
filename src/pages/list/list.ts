@@ -1,3 +1,4 @@
+import { VehiculoPage } from './../vehiculo/vehiculo';
 import { VehiculosFiltrarModalComponent } from './../../components/vehiculos-filtrar-modal/vehiculos-filtrar-modal';
 import { VehiculosPopoverComponent } from './../../components/vehiculos-popover/vehiculos-popover';
 import { VehiculoDisponible, Marca } from './../../interfaces/vehiculo-disponible';
@@ -28,11 +29,8 @@ export class ListPage {
     this.getDisponibles();
   }
 
-  itemTapped(event, item) {
-    // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ListPage, {
-      item: item
-    });
+  ver(vehiculo){
+    this.navCtrl.push(VehiculoPage,{dataVehiculo:vehiculo});
   }
 
   presentPopover(myEvent) {
@@ -129,5 +127,9 @@ export class ListPage {
       },
     });
     modal.present();
+  }
+
+  shouldShowCancel(){
+    this.getDisponibles();
   }
 }
