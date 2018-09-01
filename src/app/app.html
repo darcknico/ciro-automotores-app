@@ -36,11 +36,11 @@
     <ion-content class="outer-content">
       <div class="menu-header" *ngIf="user" >
         <!--material-design-background-->
-        <img 
+        <img *ngIf="user.empleado"
           class="user-avatar round"
           [src]="'https://ciroautomotores.com.ar/perfil/'+user.empleado.fotoperfil"
           onerror="this.src='assets/imgs/no-disponible.png'" />
-        <p class="name">{{user.individuo.apellido}} {{user.individuo.nombre}}</p>
+        <p class="name" *ngIf="user.individuo" >{{user.individuo.apellido}} {{user.individuo.nombre}}</p>
         <p class="e-mail">{{user.email}}</p>
       </div>
       

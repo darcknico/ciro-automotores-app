@@ -1,4 +1,10 @@
 page-vehiculo {
+
+    h3,.label,{
+        color: #999;
+        font-weight: 400;
+    }
+    
     img {
         object-fit: cover !important;
     }
@@ -15,4 +21,23 @@ page-vehiculo {
       .swiper-pagination {
         bottom: 0px;
       }
+    ion-grid {
+        background-color: #3286C6;
+        ion-row{
+            text-align: center;
+        }
+        img{
+            height: 5vh !important;
+        }
+        .vertical-line{
+            border-right-width: thin;
+            border-right-style: solid;
+            border-right-color: black;
+        }
+        .horizontal-line{
+            border-bottom-width: thin;
+            border-bottom-style: solid;
+            border-bottom-color: black;
+        }
+    }
 }

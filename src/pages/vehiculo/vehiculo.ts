@@ -16,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class VehiculoPage {
 
-  vehiculo:VehiculoDisponible=null;
+  vehiculo:VehiculoDisponible;
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams

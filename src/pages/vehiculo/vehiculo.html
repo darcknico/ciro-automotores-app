@@ -7,16 +7,54 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{vehiculo.modelo}}</ion-title>
+    <ion-title>Detalle</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-  <ion-slides  no-padding lazyLoading pager="true" >
+<ion-content no-padding>
+  <h5>{{vehiculo.marca.nombre}}</h5>
+  <h3>{{vehiculo.modelo}}</h3>
+  <ion-slides no-padding lazyLoading pager="true" >
     <ion-slide *ngFor="let foto of vehiculo.fotos" class="slides" >
         <img [src]="'https:\\ciroautomotores.com.ar'+foto.archivo+'?p=small'" />
     </ion-slide>
   </ion-slides>
+  <ion-grid>
+    <ion-row class="horizontal-line">
+      <ion-col class="vertical-line">
+        <img src="assets/imgs/iconos/puertas.png" alt="">
+        <h4> {{vehiculo.cantidad_puertas}}</h4>
+        <p>Puertas</p>
+      </ion-col>
+      <ion-col class="vertical-line">
+        <img src="assets/imgs/iconos/motor.png" alt="">
+        <h4> {{vehiculo.motor}}</h4>
+        <p>Motor</p>
+      </ion-col>
+      <ion-col>
+        <img src="assets/imgs/iconos/kilometraje.png" alt="">
+        <h4> {{vehiculo.usado.kilometraje}}</h4>
+        <p>Kilometraje</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="vertical-line">
+        <img src="assets/imgs/iconos/transmision.png" alt="">
+        <h4> {{vehiculo.transmision.nombre}}</h4>
+        <p>Transmision</p>
+      </ion-col>
+      <ion-col class="vertical-line" >
+        <img src="assets/imgs/iconos/color.png" alt="">
+        <h4> {{vehiculo.usado.color}}</h4>
+        <p>Color</p>
+      </ion-col>
+      <ion-col>
+        <img src="assets/imgs/iconos/year.png" alt="">
+        <h4> {{vehiculo.year}}</h4>
+        <p>Año</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
