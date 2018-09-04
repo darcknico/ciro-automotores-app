@@ -94,4 +94,5 @@
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="^2.4.3" />
     <plugin name="cordova-sqlite-storage" spec="^2.4.0" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
 </widget>

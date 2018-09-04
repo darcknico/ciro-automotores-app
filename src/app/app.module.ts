@@ -36,9 +36,7 @@ import { OneSignal } from '@ionic-native/onesignal';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot({
-      name: '__appDB'
-    }),
+    IonicStorageModule.forRoot(),
     HttpModule,
     HttpClientModule,
     CacheModule.forRoot(),

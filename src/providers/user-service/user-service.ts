@@ -36,19 +36,7 @@ export class UserServiceProvider {
 					},error=>{
 						console.log(error);
 					});
-					console.log(data);
-				},error=>{
-					console.log(error);
-				}).catch(reason=>{
-					console.log(reason);
-					this.refreshUser().subscribe(
-					data=>{
-						console.log(data);
-					},error=>{
-						console.log(error);
-					});
 				});
-				console.log(data);
 				return data.token;
 			});
 	};
