@@ -93,4 +93,5 @@
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
     </plugin>
     <plugin name="onesignal-cordova-plugin" spec="^2.4.3" />
+    <plugin name="cordova-sqlite-storage" spec="^2.4.0" />
 </widget>
