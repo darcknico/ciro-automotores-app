@@ -4,23 +4,19 @@ page-vehiculo {
         color: #999;
         font-weight: 400;
     }
-    
-    img {
-        object-fit: cover !important;
-    }
-    ion-slides{
-        display: flex;
-        flex-direction: row;
-    }
       
     ion-slides.slides {
+        display: flex;
+        flex-direction: row;
         box-sizing: border-box;
         height: 50vh !important;
+        width: auto !important;
       }
       
-      .swiper-pagination {
+    .swiper-pagination {
         bottom: 0px;
-      }
+    }
+
     ion-grid {
         background-color: #3286C6;
         ion-row{

@@ -66,6 +66,8 @@ export class MyApp {
       else if(hasLoggedIn ) {
         this.userService.getUser().then(data=>{
           this.user = data;
+        },error=>{
+          console.log(error);
         });
         this.rootPage = HomePage;
       }
@@ -123,6 +125,8 @@ export class MyApp {
     this.events.subscribe('user:login', () => {
       this.userService.getUser().then(data=>{
         this.user = data;
+      },error=>{
+        console.log(error);
       });
       this.enableMenu(true);
     });

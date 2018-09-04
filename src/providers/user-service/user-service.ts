@@ -30,8 +30,25 @@ export class UserServiceProvider {
 			.map(response => response.json())
 			.map(data => {
 				this.setAuth(data).then(data=>{
-					this.refreshUser().subscribe(data=>{},error=>{});
+					this.refreshUser().subscribe(
+					data=>{
+						console.log(data);
+					},error=>{
+						console.log(error);
+					});
+					console.log(data);
+				},error=>{
+					console.log(error);
+				}).catch(reason=>{
+					console.log(reason);
+					this.refreshUser().subscribe(
+					data=>{
+						console.log(data);
+					},error=>{
+						console.log(error);
+					});
 				});
+				console.log(data);
 				return data.token;
 			});
 	};

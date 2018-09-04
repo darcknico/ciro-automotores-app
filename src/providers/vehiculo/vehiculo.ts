@@ -15,7 +15,6 @@ export class VehiculoProvider {
 
   keyDisponibles = "vehiculos/disponibles"
   constructor(
-    public http: HttpClient,
     public authHttp: HttpClient,
     public global: GlobalServiceProvider,
     private cache: CacheService,
