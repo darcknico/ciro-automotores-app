@@ -53,12 +53,10 @@ export class MyApp {
     public events: Events,
     public cache: CacheService,
     private oneSignal: OneSignal) {
-    this.splashScreen.show();
     this.initializeApp();
 
     // decide which menu items should be hidden by current login status stored in local storage
     this.userService.hasLoggedIn().then((hasLoggedIn) => {
-      this.splashScreen.hide();
       this.enableMenu(hasLoggedIn);
       if(!hasLoggedIn ){
         this.rootPage = LoginPage;
@@ -87,6 +85,10 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
+
+      setTimeout(()=>{
+        this.splashScreen.hide();  
+      },1000);
     });
   }
 

@@ -1,17 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.starter" version="0.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Ciro Automotores</name>
     <description>Concecionaria de autos usados en Salta y Jujuy.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Pinky</author>
     <content src="index.html" />
     <access origin="*" />
-    <allow-navigation href="http://*/*" />
+    <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
@@ -95,4 +99,5 @@
     <plugin name="onesignal-cordova-plugin" spec="^2.4.3" />
     <plugin name="cordova-sqlite-storage" spec="^2.4.0" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <engine name="android" spec="7.0.0" />
 </widget>
