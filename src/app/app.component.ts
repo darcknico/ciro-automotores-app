@@ -78,17 +78,14 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // 24 HORAS
-      this.cache.setDefaultTTL(60 * 60 * 24);
+      // SEGUNDOS MINUTOS HORAS DIAS
+      this.cache.setDefaultTTL(60 * 60 * 24 * 3);
       this.cache.setOfflineInvalidate(true);
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-
-      setTimeout(()=>{
-        this.splashScreen.hide();  
-      },1000);
+      this.splashScreen.hide();
     });
   }
 
@@ -151,6 +148,15 @@ export class MyApp {
         {
           console.log('getIds: ' + JSON.stringify(ids));
         });
+      this.userService.getUser().then((data:Usuario)=>{
+        this.oneSignal.sendTags({
+          sector: 'administracion',
+          puesto: data.empleado.puesto.nombre,
+          id_usuario: data.id,
+        });
+      },error=>{
+        console.log(error);
+      });
       this.oneSignal.handleNotificationReceived().subscribe(() => {
       // do something when notification is received
       });

@@ -6,6 +6,7 @@ import { VehiculoProvider } from './../../providers/vehiculo/vehiculo';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, PopoverController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-list',
@@ -25,6 +26,7 @@ export class ListPage {
     public loadingCtrl: LoadingController,
     public popoverCtrl: PopoverController,
     public modalCtrl: ModalController,
+    private socialSharing: SocialSharing,
   ) {
     this.getDisponibles();
   }
@@ -131,5 +133,14 @@ export class ListPage {
 
   shouldShowCancel(){
     this.getDisponibles();
+  }
+
+  compartir(vehiculo:VehiculoDisponible) {
+    console.log(vehiculo);
+    this.socialSharing.share("Share message", "Share subject", "URL to file or image", "A URL to share").then(() => {
+      console.log("shareSheetShare: Success");
+    }).catch(() => {
+      console.error("shareSheetShare: failed");
+    });
   }
 }

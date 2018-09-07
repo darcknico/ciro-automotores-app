@@ -12,6 +12,7 @@ import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SocialSharing } from '@ionic-native/social-sharing';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { PassportServiceProvider } from '../providers/passport-service/passport-service';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
@@ -61,6 +62,7 @@ import { OneSignal } from '@ionic-native/onesignal';
     GlobalServiceProvider,
     UserServiceProvider,
     VehiculoProvider,
+    SocialSharing,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
