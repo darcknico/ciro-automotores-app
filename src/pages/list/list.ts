@@ -18,6 +18,7 @@ export class ListPage {
   vehiculos: VehiculoDisponible[];
   searchTerm:string;
   marcas:Marca[]=[];
+  marcaSeleccionada;
 
   constructor(
     public navCtrl: NavController, 
@@ -28,6 +29,7 @@ export class ListPage {
     public modalCtrl: ModalController,
     private socialSharing: SocialSharing,
   ) {
+    this.marcaSeleccionada = 0;
     this.getDisponibles();
   }
 
@@ -60,22 +62,26 @@ export class ListPage {
     loading.present();
     this.original = this.vehiculoProvider.disponibles(refresher);
     this.original.subscribe(data => {
-      if(refresher){
-        refresher.complete();
-      }
       this.vehiculos = data;
-      data.forEach(vehiculo=>{
-        var existing = this.marcas.find(function(each) {
-          return each.id === vehiculo.id_marca;
+      if(refresher){
+        this.marcaSeleccionada = 0;
+        refresher.complete();
+        this.marcas = [];
+      }
+      if(this.marcas.length==0){
+        data.forEach(vehiculo=>{
+          var existing = this.marcas.find(function(each) {
+            return each.id === vehiculo.id_marca;
+          });
+          if (existing) {
+              existing.cantidad = existing.cantidad + 1;
+          } else {
+            var obj:Marca=vehiculo.marca;
+            obj.cantidad=1;
+            this.marcas.push(obj);
+          }
         });
-        if (existing) {
-            existing.cantidad = existing.cantidad + 1;
-        } else {
-          var obj:Marca=vehiculo.marca;
-          obj.cantidad=1;
-          this.marcas.push(obj);
-        }
-      });
+      }
       loading.dismiss();
     },
     error => {
@@ -124,8 +130,15 @@ export class ListPage {
     var self = this;
     let modal = this.modalCtrl.create(VehiculosFiltrarModalComponent,{
       dataMarcas:self.marcas,
+      dataMarcaSeleccionada:self.marcaSeleccionada,
       funcFiltrarMarca:function(id_marca){
-        self.filtrarMarca(id_marca);
+        if(self.marcaSeleccionada == id_marca){
+          self.marcaSeleccionada = 0;
+          self.getDisponibles();
+        } else {
+          self.marcaSeleccionada = id_marca;  
+          self.filtrarMarca(id_marca);
+        }
       },
     });
     modal.present();

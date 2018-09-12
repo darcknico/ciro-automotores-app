@@ -7,11 +7,22 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Bienvenido a Ciro Automotores</h3>
+<ion-content>
+  <ion-row >
+    <h3 text-center>Bienvenido a Ciro Automotores</h3>
+  </ion-row>
 
-  <p>
+  <p *ngIf="notificaciones.length == 0" >
     No posee notificaciones.
   </p>
+  <ion-card *ngFor="let item of notificaciones" class="adv-map">
+    <ion-card-content>
+      <ion-card-title>
+        {{item.titulo}}
+      </ion-card-title>
+      <h3>Agregado: {{item.created_at | date:'dd/MM/yyyy' }}</h3>
+      <p>{{item.mensaje}}</p>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

@@ -11,11 +11,17 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-row>
-    <button ion-button *ngFor="let marca of marcas" round (click)="filtrarMarca(marca.id)" >
+<ion-content padding>
+  <h4>Marcas Disponibles</h4>
+  <ion-row justify-content-center	>
+    <button class="button-badge"
+      ion-button 
+      small round
+      [outline]="marca.id == seleccionado?false:true"
+      *ngFor="let marca of marcas" 
+      (click)="filtrarMarca(marca.id)" >
       {{marca.nombre}} 
-      <ion-badge color="secondary">{{marca.cantidad}}</ion-badge>
+      <ion-badge class="button-badge-quantity" small round color="dark">{{marca.cantidad}}</ion-badge>
     </button>
   </ion-row>
 </ion-content>

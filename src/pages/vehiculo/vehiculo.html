@@ -16,9 +16,9 @@
 <ion-content no-padding>
   <h5>{{vehiculo.marca.nombre}}</h5>
   <h3>{{vehiculo.modelo}}</h3>
-  <ion-slides no-padding lazyLoading pager="true" >
+  <ion-slides no-padding lazyLoading pager="true" *ngIf="vehiculo.fotos.length > 0">
     <ion-slide *ngFor="let foto of vehiculo.fotos" class="slides" >
-        <img [src]="'https:\\ciroautomotores.com.ar'+foto.archivo+'?p=small'" />
+      <img [src]="'https:\\ciroautomotores.com.ar'+foto.archivo+'?p=small'" />
     </ion-slide>
   </ion-slides>
   <ion-grid>

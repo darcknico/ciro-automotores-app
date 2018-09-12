@@ -24,6 +24,7 @@ import { CacheModule } from 'ionic-cache';
 import { VehiculoProvider } from '../providers/vehiculo/vehiculo';
 
 import { OneSignal } from '@ionic-native/onesignal';
+import { NotificacionProvider } from '../providers/notificacion/notificacion';
 @NgModule({
   declarations: [
     MyApp,
@@ -68,6 +69,7 @@ import { OneSignal } from '@ionic-native/onesignal';
       useClass: TokenInterceptor,
       multi: true
     },
+    NotificacionProvider,
   ]
 })
 export class AppModule {}

@@ -15,13 +15,15 @@ import { Platform, NavParams, ViewController } from 'ionic-angular';
 export class VehiculosFiltrarModalComponent {
 
   marcas:Marca[];
+  seleccionado = 0;
 
   constructor(
     public platform: Platform,
     public params: NavParams,
-    public viewCtrl: ViewController
+    public viewCtrl: ViewController,
   ) {
     this.marcas = params.get('dataMarcas');
+    this.seleccionado = params.get('dataMarcaSeleccionada');
   }
 
   close() {

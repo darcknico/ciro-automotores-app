@@ -14,3 +14,11 @@ button[fab].fab-map {
 ion-content.cards-bg {
     background-color: #f4f4f7;
 }
+
+.subtittle{
+    display: inline-flex;
+    i{
+        position: absolute;
+        right: 2rem;
+    }
+}

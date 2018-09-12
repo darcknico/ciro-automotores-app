@@ -32,7 +32,10 @@
       -->
     </div>
     <ion-card-content>
-      <h5><b>{{vehiculo.marca.nombre}}</b> <i>{{vehiculo.created_at | date:'dd/MM/yyyy' }}</i></h5>
+      <div class="subtittle" >
+          <h4><b>{{vehiculo.marca.nombre}}</b></h4>
+          <i>Agregado:{{vehiculo.created_at | date:'dd/MM/yyyy' }}</i>
+      </div>
       <ion-card-title>
         {{vehiculo.modelo}}
       </ion-card-title>
@@ -40,16 +43,13 @@
         PRECIO VENTA: {{vehiculo.precio_venta | currency:'ARG' }}
       </p>
       <p>
-        ENTREGA MINIMA: {{vehiculo.entrega_minima | currency:'ARG' }}
+        ENTREGA MINIMA: {{vehiculo.calculo_entrega_minima | currency:'ARG' }}
+      </p>
+      <p>
+        CREDITO: {{vehiculo.calculo_credito | currency:'ARG' }}
       </p>
     </ion-card-content>
     <ion-row no-padding>
-      <ion-col>
-        <button ion-button clear small color="danger" icon-start>
-          <ion-icon name='star'></ion-icon>
-          Favorito
-        </button>
-      </ion-col>
       <ion-col text-center>
         <button ion-button clear small color="danger" icon-start (click)="ver(vehiculo)">
           <ion-icon name='open'></ion-icon>

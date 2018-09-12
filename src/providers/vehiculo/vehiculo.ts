@@ -25,12 +25,12 @@ export class VehiculoProvider {
   disponibles(refresher?){
     let url = this.global.apiUrl+this.keyDisponibles;
     let req = this.authHttp.get<VehiculoDisponible[]>(url);
-    let ttl = 5;
+    let ttl = 60 * 60 * 24 * 3;
     if (refresher) {
       let delayType = 'all';
       return this.cache.loadFromDelayedObservable(url, req, this.keyDisponibles, ttl, delayType);
     } else {
-      return this.cache.loadFromObservable(url, req, this.keyDisponibles, ttl);
+      return this.cache.loadFromObservable(url, req, this.keyDisponibles);
     }
   }
 
