@@ -20,4 +20,8 @@ export class HomePage {
     });
   }
 
+  openUrl(url:string){
+    window.open(url,'_system', 'location=yes');
+  }
+
 }

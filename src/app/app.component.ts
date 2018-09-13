@@ -29,7 +29,7 @@ export interface PageInterface {
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   appPages: PageInterface[] = [
     { title: 'Inicio', name: 'HomePage', icon:'home', component: HomePage},

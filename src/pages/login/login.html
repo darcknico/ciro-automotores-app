@@ -22,26 +22,25 @@
     </div>
 
     <!-- Login form -->
-    <form class="list-form" #form="ngForm" (ngSubmit)="onLogin(form)" novalidate>
+    <form class="list-form" [formGroup]="loginForm" >
       <ion-item>
         <ion-label floating>
           <ion-icon name="mail" item-start class="text-primary"></ion-icon>
           Email
         </ion-label>
-        
-        <ion-input type="email" [(ngModel)]="login.email" name="email" ></ion-input>
+        <ion-input type="email" formControlName="email" name="email" ></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label floating>
           <ion-icon name="lock" item-start class="text-primary"></ion-icon>
           Contraseña
         </ion-label>
-        <ion-input type="password" [(ngModel)]="login.password" name="password" ></ion-input>
+        <ion-input [type]="passwordType" formControlName="password" name="password" ></ion-input>
+        <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
       </ion-item>
       <br>
       <div padding>
-        <button ion-button icon-start block color="#3286C6" tappable type="submit" block>
+        <button ion-button icon-start block color="#3286C6" tappable (click)="onLogin()" >
           <ion-icon name="log-in"></ion-icon>
           INGRESAR
         </button>

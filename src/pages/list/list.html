@@ -22,7 +22,10 @@
   
   <ion-card *ngFor="let vehiculo of vehiculos" class="adv-map">
     <div style="position: relative">
-      <img *ngIf="vehiculo.fotos.length > 0"  [src]="'https:\\ciroautomotores.com.ar'+vehiculo.fotos[0].archivo+'?p=small'"/>
+      <img 
+        *ngIf="vehiculo.fotos.length > 0" 
+        [src]="'https:\\ciroautomotores.com.ar'+vehiculo.fotos[0].archivo+'?p=small'"
+        (click)="ver(vehiculo)"/>
       <!--
       <ion-fab right down>
         <button ion-fab (click)="ver(vehiculo)">

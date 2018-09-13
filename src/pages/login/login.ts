@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, AlertController, LoadingController } from 'ionic-angular';
-import { NgForm } from '@angular/forms';
-import { UserOptions } from '../../interfaces/user-options';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { HomePage } from '../home/home';
 
@@ -18,10 +17,10 @@ import { HomePage } from '../home/home';
 })
 export class LoginPage {
 
-	login:UserOptions = {
-		email:'',
-		password:'',
-	};
+	loginForm:FormGroup;
+
+	passwordType: string = 'password';
+  	passwordIcon: string = 'eye-off';
 
 	constructor(
 		public userService: UserServiceProvider,
@@ -29,27 +28,34 @@ export class LoginPage {
 		public events: Events,
 		public navParams: NavParams,
 		private alertCtrl: AlertController,
-		private loadingCtrl: LoadingController) {
-
+		private loadingCtrl: LoadingController,
+		private formBuilder: FormBuilder) {
+		this.loginForm = this.formBuilder.group({
+			email : ['', Validators.required],
+			password : ['', Validators.required],
+		});
 	}
 
-	onLogin(form: NgForm) {
-
-		if (form.valid) {
-
-			let loading = this.loadingCtrl.create({});
-			loading.present();
-			this.userService.login(this.login).subscribe(data => {
-					this.events.publish('user:login');
-					this.navCtrl.setRoot(HomePage);
-					loading.dismiss();
-				},
-				error => {
-					loading.dismiss();
-					this.showError(error);
-			});
-			
+	onLogin() {
+		if(!this.loginForm.valid){
+			return false;
 		}
+		var login = {
+			email : this.loginForm.controls.email.value,
+			password : this.loginForm.controls.password.value,
+		}
+		let loading = this.loadingCtrl.create({});
+		loading.present();
+		this.userService.login(login).subscribe(data => {
+				this.events.publish('user:login');
+				this.navCtrl.setRoot(HomePage);
+				loading.dismiss();
+			},
+			error => {
+				loading.dismiss();
+				this.showError(error);
+		});
+			
 	}
 	
 	showError(error) {
@@ -61,6 +67,11 @@ export class LoginPage {
 			buttons: ['OK']
 		});
 		alert.present();
+	}
+
+	hideShowPassword() {
+		this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+		this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
 	}
 
 }

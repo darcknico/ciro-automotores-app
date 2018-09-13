@@ -150,10 +150,16 @@ export class ListPage {
 
   compartir(vehiculo:VehiculoDisponible) {
     console.log(vehiculo);
-    this.socialSharing.share("Share message", "Share subject", "URL to file or image", "A URL to share").then(() => {
+    this.socialSharing.share(
+      vehiculo.marca.nombre+" "+vehiculo.modelo+
+      " Precio VENTA "+vehiculo.precio_venta+" - Entrega Minima "+vehiculo.calculo_entrega_minima+" - Credito "+vehiculo.calculo_credito, 
+      vehiculo.modelo,
+      null,
+      "https:\\ciroautomotores.com.ar").then(() => {
       console.log("shareSheetShare: Success");
     }).catch(() => {
       console.error("shareSheetShare: failed");
     });
   }
+
 }

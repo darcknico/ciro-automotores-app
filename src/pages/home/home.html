@@ -9,14 +9,16 @@
 
 <ion-content>
   <ion-row >
-    <h3 text-center>Bienvenido a Ciro Automotores</h3>
+    <h2 text-center>Bienvenido a Ciro Automotores</h2>
   </ion-row>
-
+  <ion-row>
+    <h3>Ultimas noticias</h3>
+  </ion-row>
   <p *ngIf="notificaciones.length == 0" >
-    No posee notificaciones.
+    No hay Noticias.
   </p>
   <ion-card *ngFor="let item of notificaciones" class="adv-map">
-    <ion-card-content>
+    <ion-card-content (click)="openUrl(item.url)" >
       <ion-card-title>
         {{item.titulo}}
       </ion-card-title>

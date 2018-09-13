@@ -7,7 +7,17 @@ page-login {
     }
 
     .item-md.item-input .item-inner {
-        border-bottom-color: white !important;
+        color:white !important;
     }
 
+    ion-img{
+        background: rgba(255, 255, 255, 0);
+    }
+
+    .passwordIcon{
+        font-size:2rem !important;
+        position: relative !important;
+        top: 22px !important;
+        margin: 0 auto !important;
+    }
 }
