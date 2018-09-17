@@ -128,6 +128,7 @@ export class MyApp {
         console.log(error);
       });
       this.enableMenu(true);
+      this.suscribir();
     });
 
     this.events.subscribe('user:logout', () => {
@@ -148,15 +149,7 @@ export class MyApp {
         {
           console.log('getIds: ' + JSON.stringify(ids));
         });
-      this.userService.getUser().then((data:Usuario)=>{
-        this.oneSignal.sendTags({
-          sector: 'administracion',
-          puesto: data.empleado.puesto.nombre,
-          id_usuario: data.id,
-        });
-      },error=>{
-        console.log(error);
-      });
+      this.suscribir();
       this.oneSignal.handleNotificationReceived().subscribe(() => {
       // do something when notification is received
       });
@@ -165,5 +158,24 @@ export class MyApp {
       });
       this.oneSignal.endInit();
     }
+  }
+
+  suscribir():void{
+    this.userService.getUser().then((data:Usuario)=>{
+      if(data==null){
+        this.oneSignal.deleteTags([
+          'sector','puesto','id_usuario'
+        ]);
+      } else {
+        this.oneSignal.sendTags({
+          sector: 'administracion',
+          puesto: data.empleado.puesto.nombre,
+          id_usuario: data.id,
+        });
+      }
+      
+    },error=>{
+      console.log(error);
+    });
   }
 }
