@@ -59,6 +59,9 @@
           Ver
         </button>
       </ion-col>
+      <ion-col text-center *ngIf="vehiculo.estado_vehiculo == 1" >
+        <button ion-button round small style="color:black; background-color: yellow;">SEÑADO</button>
+      </ion-col>
       <ion-col text-right>
         <button ion-button clear small color="danger" icon-start (click)="compartir(vehiculo)">
           <ion-icon name='share-alt'></ion-icon>
