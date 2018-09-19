@@ -53,27 +53,10 @@ export class MyApp {
     public events: Events,
     public cache: CacheService,
     private oneSignal: OneSignal) {
+    this.splashScreen.show();
     this.initializeApp();
-
-    // decide which menu items should be hidden by current login status stored in local storage
-    this.userService.hasLoggedIn().then((hasLoggedIn) => {
-      this.enableMenu(hasLoggedIn);
-      if(!hasLoggedIn ){
-        this.rootPage = LoginPage;
-      }
-      else if(hasLoggedIn ) {
-        this.userService.getUser().then(data=>{
-          this.user = data;
-        },error=>{
-          console.log(error);
-        });
-        this.rootPage = HomePage;
-      }
-    });
-    
     this.listenToLoginEvents();
-
-    this.initializeOnseSignal();
+    
   }
 
   initializeApp() {
@@ -81,41 +64,40 @@ export class MyApp {
       // SEGUNDOS MINUTOS HORAS DIAS
       this.cache.setDefaultTTL(60 * 60 * 24 * 3);
       this.cache.setOfflineInvalidate(true);
-
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+    
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.userService.hasLoggedIn().then((hasLoggedIn) => {
+        this.splashScreen.hide();
+        this.enableMenu(hasLoggedIn);
+        if(!hasLoggedIn ){
+          this.rootPage = LoginPage;
+        }
+        else if(hasLoggedIn ) {
+          this.userService.getUser().then(data=>{
+            this.user = data;
+          },error=>{
+            console.log(error);
+          });
+          this.rootPage = HomePage;
+        }
+      });
+      this.initializeOnseSignal();
     });
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    //this.nav.setRoot(page.component);
     let params = {};
-
-    // the nav component was found using @ViewChild(Nav)
-    // setRoot on the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
     if (page.index) {
       params = { tabIndex: page.index };
     }
-
-    // If we are already on tabs just change the selected tab
-    // don't setRoot again, this maintains the history stack of the
-    // tabs even if changing them from the menu
     if (this.nav.getActiveChildNavs().length && page.index != undefined) {
       this.nav.getActiveChildNavs()[0].select(page.index);
     } else {
-    // Set the root of the nav with params if it's a tab index
       this.nav.setRoot(page.component, params).catch((err: any) => {
         console.log(`Didn't set nav root: ${err}`);
         });
     }
-
     if (page.logsOut === true) {
-      // Give the menu time to close before changing to logged out
       this.userService.logout();
     }
   }
