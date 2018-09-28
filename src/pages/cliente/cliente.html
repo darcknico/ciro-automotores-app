@@ -1,0 +1,56 @@
+<!--
+  Generated template for the ClientePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mis Clientes</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <p *ngIf="clientes.length == 0" >
+    No hay Clientes agregados.
+  </p>
+  <ion-card *ngFor="let item of clientes" class="adv-map">
+    <ion-card-header>
+      {{item.apellido}} {{item.nombre}}      
+    </ion-card-header>
+    <ion-card-content >
+      <ion-card-title>
+      {{item.contacto}}
+      </ion-card-title>
+      <p *ngIf="item.observaciones.length>0" >Observaciones: {{item.observaciones}}</p>
+    </ion-card-content>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small (click)="editar(item)" >
+          <ion-icon name="create"></ion-icon>
+          <div>Editar</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small (click)="eliminar(item)">
+          <ion-icon name="trash"></ion-icon>
+          <div>Eliminar</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          {{item.created_at | date:'dd/MM/yy HH:mm' }}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

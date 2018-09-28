@@ -4,6 +4,7 @@ import { IonicModule } from 'ionic-angular'
 	declarations: [
     ],
 	imports: [IonicModule],
-	exports: []
+	exports: [
+    ]
 })
 export class ComponentsModule {}

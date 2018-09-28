@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Notificaciones
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="close()">
+        <span ion-text color="primary" showWhen="ios">Cancelar</span>
+        <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding >
+  <p *ngIf="notificaciones.length == 0" >
+    No hay Noticias.
+  </p>
+  <ion-card *ngFor="let item of notificaciones" class="adv-map">
+    <ion-card-content (click)="openUrl(item.url)" >
+      <ion-card-title>
+        {{item.titulo}}
+      </ion-card-title>
+      <h3>Agregado: {{item.created_at | date:'dd/MM/yyyy' }}</h3>
+      <p>{{item.mensaje}}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,6 +1,7 @@
+import { VehiculoVerPopoverComponent } from './../../components/vehiculo-ver-popover/vehiculo-ver-popover';
 import { VehiculoDisponible } from './../../interfaces/vehiculo-disponible';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 
 /**
  * Generated class for the VehiculoPage page.
@@ -19,13 +20,25 @@ export class VehiculoPage {
   vehiculo:VehiculoDisponible;
 
   constructor(
-    public navCtrl: NavController, public navParams: NavParams
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public popoverCtrl: PopoverController,
   ) {
     this.vehiculo=navParams.get("dataVehiculo");
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad VehiculoPage');
+    
+  }
+
+  presentPopover(myEvent) {
+    var self = this;
+    let popover = this.popoverCtrl.create(VehiculoVerPopoverComponent,{
+      dataVehiculo:self.vehiculo,
+    });
+    popover.present({
+      ev: myEvent
+    });
   }
 
 }

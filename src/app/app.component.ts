@@ -1,3 +1,6 @@
+import { ClientePage } from './../pages/cliente/cliente';
+import { NetworkServiceProvider } from './../providers/network-service/network-service';
+import { ClienteDataBaseProvider } from './../providers/cliente-data-base/cliente-data-base';
 import { Usuario } from './../interfaces/user-options';
 import { LoginPage } from './../pages/login/login';
 import { Component, ViewChild } from '@angular/core';
@@ -11,6 +14,8 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
 import { CacheService } from 'ionic-cache';
 
 import { OneSignal } from '@ionic-native/onesignal';
+import { SQLite } from '@ionic-native/sqlite';
+import { Network } from '@ionic-native/network';
 
 export interface PageInterface {
   title: string;
@@ -31,28 +36,39 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
+  //INICIO BASE
   appPages: PageInterface[] = [
     { title: 'Inicio', name: 'HomePage', icon:'home', component: HomePage},
   ];
+
+  //INICIO BASE LOGEADO
   loggedInPages: PageInterface[] = [
     { title: 'Disponibles', name: 'ListPage', icon:'car', component: ListPage},
+    { title: 'Mis Clientes', name: 'ClientePage', icon:'people', component: ClientePage},
     { title: 'Salir', name: 'LoginPage', icon:'log-out', component: LoginPage, logsOut: true }
   ];
+  
+  //INICIO BASE DESLOGADO
   loggedOutPages: PageInterface[] = [
       { title: 'Ingresar', name: 'LoginPage', icon:'log-in', component: LoginPage},
   ];
-
+  
   user:Usuario=null;
 
   constructor(
-    public platform: Platform, 
-    public statusBar: StatusBar, 
-    public splashScreen: SplashScreen,
-    public userService: UserServiceProvider,
-    public menu: MenuController,
-    public events: Events,
-    public cache: CacheService,
-    private oneSignal: OneSignal) {
+    private platform: Platform, 
+    private statusBar: StatusBar, 
+    private splashScreen: SplashScreen,
+    private userService: UserServiceProvider,
+    private menu: MenuController,
+    private events: Events,
+    private cache: CacheService,
+    private oneSignal: OneSignal,
+    private sqlite: SQLite,
+    private clienteDataBase: ClienteDataBaseProvider,
+    private networkService: NetworkServiceProvider,
+    private network: Network,
+  ) {
     this.splashScreen.show();
     this.initializeApp();
     this.listenToLoginEvents();
@@ -82,6 +98,7 @@ export class MyApp {
         }
       });
       this.initializeOnseSignal();
+      this.initializeDataBase();
     });
   }
 
@@ -158,6 +175,30 @@ export class MyApp {
       
     },error=>{
       console.log(error);
+    });
+  }
+
+  initializeDataBase():void{
+    if (this.platform.is('cordova')) {
+      this.sqlite.create({
+        name: 'data.db',
+        location: 'default'
+      }).then(db=>{
+        this.clienteDataBase.setDatabase(db);
+        this.clienteDataBase.createTable();
+      });
+    }
+
+  }
+
+  initializeNetworkEvents():void{
+    
+    this.networkService.initializeNetworkEvents();
+    this.events.subscribe('network:offline', () => {
+        alert('network:offline ==> '+this.network.type);    
+    });
+    this.events.subscribe('network:online', () => {
+        alert('network:online ==> '+this.network.type);        
     });
   }
 }

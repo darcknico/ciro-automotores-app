@@ -16,6 +16,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { UserServiceProvider } from '../providers/user-service/user-service';
 import { PassportServiceProvider } from '../providers/passport-service/passport-service';
 import { GlobalServiceProvider } from '../providers/global-service/global-service';
+import { ClienteDataBaseProvider } from './../providers/cliente-data-base/cliente-data-base';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../interceptors/token-interceptor';
@@ -25,6 +26,16 @@ import { VehiculoProvider } from '../providers/vehiculo/vehiculo';
 
 import { OneSignal } from '@ionic-native/onesignal';
 import { NotificacionProvider } from '../providers/notificacion/notificacion';
+import { VehiculoVerPopoverComponent } from '../components/vehiculo-ver-popover/vehiculo-ver-popover';
+import { HomeNotificacionesComponent } from '../components/home-notificaciones/home-notificaciones';
+import { ClientePage } from '../pages/cliente/cliente';
+import { DateroPage } from '../pages/datero/datero';
+import { ClienteNuevoComponent } from '../components/cliente-nuevo/cliente-nuevo';
+import { BaseDatosLocalProvider } from '../providers/base-datos-local/base-datos-local';
+import { SQLite } from '@ionic-native/sqlite';
+import { NetworkServiceProvider } from '../providers/network-service/network-service';
+import { Network } from '@ionic-native/network';
+import { ClientePopoverComponent } from '../components/cliente-popover/cliente-popover';
 @NgModule({
   declarations: [
     MyApp,
@@ -33,7 +44,13 @@ import { NotificacionProvider } from '../providers/notificacion/notificacion';
     LoginPage,
     VehiculosPopoverComponent,
     VehiculosFiltrarModalComponent,
+    VehiculoVerPopoverComponent,
     VehiculoPage,
+    ClientePage,
+    ClienteNuevoComponent,
+    ClientePopoverComponent,
+    DateroPage,
+    HomeNotificacionesComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +59,6 @@ import { NotificacionProvider } from '../providers/notificacion/notificacion';
     HttpModule,
     HttpClientModule,
     CacheModule.forRoot(),
-    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,12 +68,20 @@ import { NotificacionProvider } from '../providers/notificacion/notificacion';
     LoginPage,
     VehiculosPopoverComponent,
     VehiculosFiltrarModalComponent,
+    VehiculoVerPopoverComponent,
     VehiculoPage,
+    ClientePage,
+    ClienteNuevoComponent,
+    ClientePopoverComponent,
+    DateroPage,
+    HomeNotificacionesComponent,
   ],
   providers: [
+    Network,
     StatusBar,
     SplashScreen,
     OneSignal,
+    SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PassportServiceProvider,
     GlobalServiceProvider,
@@ -70,6 +94,9 @@ import { NotificacionProvider } from '../providers/notificacion/notificacion';
       multi: true
     },
     NotificacionProvider,
+    BaseDatosLocalProvider,
+    ClienteDataBaseProvider,
+    NetworkServiceProvider,
   ]
 })
 export class AppModule {}

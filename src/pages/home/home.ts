@@ -1,7 +1,7 @@
-import { Notificacion } from './../../interfaces/notificacion';
-import { NotificacionProvider } from './../../providers/notificacion/notificacion';
+import { ClienteNuevoComponent } from './../../components/cliente-nuevo/cliente-nuevo';
+import { HomeNotificacionesComponent } from './../../components/home-notificaciones/home-notificaciones';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -9,19 +9,22 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  notificaciones:Notificacion[] = [];
 
   constructor(
     public navCtrl: NavController,
-    private notificacionService:NotificacionProvider
+    public modalCtrl: ModalController,
   ) {
-    this.notificacionService.get(5).subscribe(data=>{
-      this.notificaciones = data;
-    });
+    
   }
 
-  openUrl(url:string){
-    window.open(url,'_system', 'location=yes');
+  notificaciones():void{
+    let modal = this.modalCtrl.create(HomeNotificacionesComponent);
+    modal.present();
+  }
+
+  cliente_nuevo():void{
+    let modal = this.modalCtrl.create(ClienteNuevoComponent);
+    modal.present();
   }
 
 }

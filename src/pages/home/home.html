@@ -4,27 +4,32 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Inicio</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="notificaciones()">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
   <ion-row >
     <h2 text-center>Bienvenido a Ciro Automotores</h2>
   </ion-row>
-  <ion-row>
-    <h3>Ultimas noticias</h3>
-  </ion-row>
-  <p *ngIf="notificaciones.length == 0" >
-    No hay Noticias.
-  </p>
-  <ion-card *ngFor="let item of notificaciones" class="adv-map">
-    <ion-card-content (click)="openUrl(item.url)" >
-      <ion-card-title>
-        {{item.titulo}}
-      </ion-card-title>
-      <h3>Agregado: {{item.created_at | date:'dd/MM/yyyy' }}</h3>
-      <p>{{item.mensaje}}</p>
-    </ion-card-content>
-  </ion-card>
-
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start (click)="cliente_nuevo()" >
+          <ion-icon name="person-add"></ion-icon>
+          <p>Agregar<br> Cliente</p>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start>
+          <ion-icon name="car"></ion-icon>
+          <p>Vehiculos<br> Disponibles</p>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
