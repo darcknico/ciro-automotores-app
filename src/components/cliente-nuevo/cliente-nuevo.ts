@@ -72,7 +72,7 @@ export class ClienteNuevoComponent implements OnInit {
     cliente.id = this.id;
     cliente.nombre = this.f.nombre.value;
     cliente.apellido = this.f.apellido.value;
-    cliente.contacto = this.f.contacto.value;
+    cliente.telefono = this.f.telefono.value;
     cliente.observaciones = this.f.observaciones.value;
     if(this.id == 0){
       this.clienteDataBase.insert(cliente).then(response => {

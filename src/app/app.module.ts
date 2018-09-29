@@ -36,6 +36,7 @@ import { SQLite } from '@ionic-native/sqlite';
 import { NetworkServiceProvider } from '../providers/network-service/network-service';
 import { Network } from '@ionic-native/network';
 import { ClientePopoverComponent } from '../components/cliente-popover/cliente-popover';
+import { ClienteServiceProvider } from '../providers/cliente-service/cliente-service';
 @NgModule({
   declarations: [
     MyApp,
@@ -97,6 +98,7 @@ import { ClientePopoverComponent } from '../components/cliente-popover/cliente-p
     BaseDatosLocalProvider,
     ClienteDataBaseProvider,
     NetworkServiceProvider,
+    ClienteServiceProvider,
   ]
 })
 export class AppModule {}
